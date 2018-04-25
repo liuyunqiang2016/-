@@ -1,0 +1,33 @@
+lib包：velocity-1.7.jar
+
+代码片段：
+StringWriter writer = new StringWriter();
+String url = "com/ods/template/mobile/app/wx/defined_from_result.vm";
+Properties p = new Properties();
+        p.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        p.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");
+        p.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
+        p.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8");   
+        VelocityEngine ve = new VelocityEngine();
+        Template t=null;
+        try {
+         ve.init(p);
+         t = ve.getTemplate((url));
+        } catch (Exception e) {
+            logger.error("{}加载失败！{}",url,e);
+        }
+        
+VelocityContext context = new VelocityContext();
+        context.put("userid",user.getUserid());
+        context.put("logindeptid",user.getDeptid());
+        context.put("currenttime",currenttime);
+        context.put("moduleid", moduleid);
+        Set<String> keys = map.keySet();
+        for(String key : keys){
+        	context.put(key, map.get(key));
+        }
+        t.merge(context, writer);
+        
+        //map.put("jspath",AjaxAction.replaceAllParams(modulecode,"app",null));
+        readResultTemplate("com/ods/template/computer/jsfile.vm",map,writer);
+        return writer.toString();
