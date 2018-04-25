@@ -1,0 +1,160 @@
+<!-- 您请求的URL为:$requestURL -->
+<!-- 导入DOCTYPE会引起登陆页面表单元素错位的Bug -->
+<!DOCTYPE HTML>
+
+<meta http-equiv="keywords" content="微信平台">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="description" content="ODS">
+
+<meta http-equiv="cache-control" content="public">  
+<!-- 关闭meta的缓存清除设置，改用js,css版本号可控制
+<meta http-equiv="pragma" content="no-cache">  
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">  
+<meta http-equiv="expires" content="0">
+-->
+<!--去掉数字会自动拨号 -->
+<meta name = "format-detection" content="telephone = no" />
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    
+
+<title>${title}</title>
+<!-- 加载EXT定义样式库 
+<link rel="stylesheet" type="text/css" href="../resources/modern/css/theme-cupertino-all.cssgz">
+-->
+<link rel="stylesheet" type="text/css" href="../resources/modern/css/theme-cupertino-all.css?v=$!map.get('css.version.theme.cupertino.all')">
+<link rel="stylesheet" type="text/css" href="../resources/modern/css/theme-cupertino-app.css?v=$!map.get('css.version.theme.cupertino.app')">
+
+<!-- 加载ODS定义样式库 -->
+<link rel="stylesheet" type="text/css" href="../resources/ods/css/ext_touch.css?v=$!map.get('css.version.ext.touch')">
+<link rel="stylesheet" type="text/css" href="../app/wx/resources/css/button.css?v=$!map.get('css.version.button')">
+<link rel="stylesheet" type="text/css" href="../app/pay/resources/css/pay.css?v=$!map.get('css.version.wx')">
+
+<!-- 加载EXT JS 
+<script type="text/javascript" src="../resources/modern/js/ext-modern-all.jsgz"></script>
+-->
+<script type="text/javascript" src="../resources/modern/js/ext-modern-all.js?v=$!map.get('js.version.ext.modern.all')"></script>
+<script type="text/javascript" src="../resources/modern/js/locale-zh_CN.js?v=$!map.get('js.version.locale.zh.CN')"></script>
+<script type="text/javascript" src="../resources/modern/js/theme-cupertino.js?v=$!map.get('js.version.theme.cupertino')"></script>
+<script type="text/javascript" src="../resources/modern/js/ext-modern-app.js?v=$!map.get('js.version.ext.modern.app')"></script>
+
+<!-- 加载ODS JS -->
+<script type="text/javascript" src="../resources/ods/js/check.js?v=$!map.get('js.version.check')"></script>
+<script type="text/javascript" src="../resources/ods/js/eredg4.js?v=$!map.get('js.version.eredg4')"></script>
+<script type="text/javascript" src="../resources/ods/js/comm.js?v=$!map.get('js.version.comm')"></script>
+<script type="text/javascript" src="../resources/ods/js/modern.js?v=$!map.get('js.version.modern')"></script>
+
+<script type="text/javascript" src="../app/pay/resources/js/pay.js?v=$!map.get('js.version.wx')"></script>
+
+<script type="text/javascript">
+	var modulecode = '$!map.get('modulecode')';
+	var cmodulecode = '$!map.get('cmodulecode')';
+	var jscode = '$!map.get('jscode')';
+	var cjscode = '$!map.get('cjscode')';
+	var appid = '$!map.get('appid')';
+	var gh_no = '$!map.get('gh_no')';	
+	var openid = '$!map.get('openid')';
+	var imgsUrl = '$!map.get('imgsUrl')';	
+	
+	<!-- 第三方系统传入参数 -->
+	var prepayorderid = '$!map.get('prepayorderid')';		
+	var body = '$!map.get('body')';	
+	var money = '$!map.get('money')';	
+	var wxpay = '$!map.get('wxpay')';	
+	var unionpay = '$!map.get('unionpay')';	
+	var alipay = '$!map.get('alipay')';		
+	var redirecturl = '$!map.get('redirecturl')';	
+	var paynumber = '$!map.get('paynumber')';	
+	var checkcode = '$!map.get('checkcode')';	
+	var userName = '$!map.get('userName')';	
+	var thirdpay = '$!map.get('thirdpay')';	
+	var paysystem = '$!map.get('paysystem')';	
+	var thirdpayname = '$!map.get('thirdpayname')';	
+	var payidcard = '$!map.get('payidcard')';	
+	var payusername = '$!map.get('payusername')';	
+	var idtype = '$!map.get('idtype')';			
+	<!-- 第三方系统传入参数 -->
+
+</script>
+
+<!-- 加载微信jssdk JS -->
+<script type="text/javascript" src="../app/wx/jsUtil/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../app/wx/jsUtil/config.js"></script>
+
+<!-- head 中 -->
+<link rel="stylesheet" href="../app/wii/resources/css/weui.min.css">
+<link rel="stylesheet" href="../app/wii/resources/css/jquery-weui.min.css">
+
+<!-- body 最后 -->
+<script src="../app/wii/resources/js/jquery-weui.min.js"></script>
+
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="../app/wii/resources/js/swiper.min.js"></script>
+
+#if($map.get('script')!="null")
+$!map.get('script')
+#end
+
+<script type="text/javascript">
+Ext.onReady(function(){
+  	var webContext = '${webContext}';
+	
+	//禁用鼠标右键
+	Ext.getDoc().on("contextmenu", function(e){
+		
+	});
+	 
+	//禁用F12
+	Ext.getDoc().on("keydown", function(e){
+		
+	});
+	
+	Ext.Ajax.setTimeout(${extAjaxTimeout});
+	Ext.application({  
+	    name: 'wx',
+	
+	    launch: function() {
+	    	payLoadJs(modulecode,'$!map.get('type')',jscode);
+		
+		
+				
+		//添加toast点穿事件处理 start
+		Ext.Viewport.onBefore('activeitemchange', function(container, newItem, oldItem) {  
+		    if (newItem.element){
+			newItem.element.addCls('prevent-pointer-events');  
+		    }  
+		}, this);  
+		  
+		Ext.Viewport.onAfter('activeitemchange', function(container, newItem, oldItem) {  
+		   setTimeout(function() {  
+		       if (newItem.element){
+			   newItem.element.removeCls('prevent-pointer-events');  
+		       }  
+		   }, 300);  
+		}, this); 
+		Ext.Viewport.on({  
+			delegate: 'mask',  
+			show: function(mask) {  
+			   var activeItem = Ext.Viewport.getActiveItem();  
+			   if (activeItem.element){
+				   activeItem.element.addCls('prevent-pointer-events');  
+			   }
+			},  
+			hide: function(mask) {  
+			   var activeItem = Ext.Viewport.getActiveItem();  
+			   setTimeout(function() {  
+			       if (activeItem.element) {
+				   activeItem.element.removeCls('prevent-pointer-events');  
+			       }
+			   }, 300);  
+			}
+		});
+		//end
+		
+	    }
+	});
+});
+</script>
