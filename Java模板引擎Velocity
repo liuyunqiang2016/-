@@ -31,3 +31,29 @@ VelocityContext context = new VelocityContext();
         //map.put("jspath",AjaxAction.replaceAllParams(modulecode,"app",null));
         readResultTemplate("com/ods/template/computer/jsfile.vm",map,writer);
         return writer.toString();
+
+
+Text.vm:
+		    ## 查询条件
+		    
+		    #set($tag="")
+		    
+		    		 #set($tag="$!tag
+		    		 #set($width=100/$!odsReportPojo.cells)
+					    var tag_$!{ename}  = Ext.create('Ext.field.Text',{
+							 labelWidth  : '110px',
+							 ##style:'font-size:12px;',
+							 label: '$!cname : ',
+							 placeHolder: '请输入...',
+			 				##fieldStyle:'background-color: #F6F6F6;border-color: #DFE9F6; background-image: none;padding-top:8px;' ,
+			 				 inputCls :'wx_template_input_field_vm',
+			 				 ##labelAlign:'top',
+					    	 id : '$!ename',
+					    	 style:'font-size:1.1em;float:left;position:relative;width:96%;margin:6px;border:1px solid #dbdbe0;border-radius:8px;',
+					    	 name : '$!ename',
+					    	## required: true,
+					    	 clearIcon : true
+					    	 });
+		    		 ")
+					    	 
+$!tag
